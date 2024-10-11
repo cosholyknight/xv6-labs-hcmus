@@ -17,7 +17,7 @@ main(int argc, char* argv[]) {
         printf("pipe initialization failed");
         exit(-1);
     }
-
+    // 79e8024d61c3dd92ccf064fc67bb99cb999f70ab ce7acd2adde5dde20adf75f11347a4e2efc45eed
     char buffer;
     int pid = fork();
     // Check fork error
