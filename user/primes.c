@@ -7,25 +7,20 @@
 void primes(int read_pipe) {
     int p[2];
     int num;
-
     if (read(read_pipe, &num, sizeof(num)) <= 0) {
         close(read_pipe); 
         return;
     }
     printf("prime %d\n", num);
-
     if (pipe(p) < 0) {
         printf("pipe creation failed\n");
         exit(1);
     }
-
     int pid = fork();
-
     if (pid < 0) {
         printf("fork failed\n");
         exit(1);
     }
-
     if (pid == 0) {
         close(p[1]);  
         close(read_pipe);  
@@ -49,7 +44,6 @@ void primes(int read_pipe) {
 int main(int argc, char *argv[]) {
     int p[2];
     pipe(p);
-    
     int pid = fork();
     if (pid == 0) {
         close(p[1]);  
@@ -60,10 +54,8 @@ int main(int argc, char *argv[]) {
         for (int i = 2; i <= 280; i++) {
             write(p[1], &i, 4);  
         }
-
         close(p[1]);  
         wait(0);  
     }
-
     exit(0);
 }
